@@ -10,9 +10,9 @@ function App() {
     console.log('App.js is loaded');
     return (
         <div>
-            <h1>Welcome to my page!</h1>
-            <Header />
+            <h1>Hey! Welcome to my page!</h1>
       <Nav />
+            <Header />
       <Body />
       <Footer />
       <Mushroom width={500} height={500}/>
