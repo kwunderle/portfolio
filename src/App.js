@@ -7,6 +7,7 @@ import Footer from "./Components/footer";
 import Layout from "./Components/layout";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
+import Projects from "./Pages/Projects";
 import Contact from "./Pages/Contact";
 import Mushroom from "./assets/mushroomWORKING3.svg";
 
@@ -15,17 +16,14 @@ function App() {
   return (
     <>
       <Nav />
+      <Body />
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="home" element={<Home />}></Route>
-          <Route path="about" element={<About />}></Route>
+          <Route path="About" element={<About />}></Route>
+          <Route path="Projects" element={<Projects />}></Route>
           <Route path="Contact" element={<Contact />}></Route>
         </Route>
       </Routes>
-      <Header />
-      <Body />
-      <Footer />
-      <Mushroom width={500} height={500} />
     </>
   );
 }
