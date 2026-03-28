@@ -13,14 +13,14 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EmailIcon from "@mui/icons-material/Email";
 
-// Sparkle animation (twinkle & float)
+// Sparkle animation
 const sparkle = keyframes`
   0% { opacity: 0; transform: scale(0.5) translateY(0px); }
   50% { opacity: 1; transform: scale(1) translateY(-8px); }
   100% { opacity: 0; transform: scale(0.5) translateY(-16px); }
 `;
 
-// Sparkle positions outside the oval
+// Sparkle positions around the oval
 const sparkles = [
   { top: "-10%", left: "10%", delay: 0 },
   { top: "-5%", left: "50%", delay: 0.5 },
@@ -33,22 +33,44 @@ const sparkles = [
 function Body() {
   return (
     <Box
-      component="section"
+      
       sx={{
         flexGrow: 1,
         p: 4,
         border: "5px solid #273627ff",
         borderRadius: 3,
+        backgroundColor: "#0e140d",
         m: 2,
+        mb: 0,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        textAlign: "center",
       }}
     >
-      <Grid container spacing={4} alignItems="center">
-        
-        {/* LEFT SIDE - IMAGE WITH OUTER SPARKLES */}
+      <Grid container spacing={10} alignItems="center">
         <Grid item xs={12} md={4}>
-          <Box display="flex" justifyContent="center" position="relative" width={250} height={300}>
-            
-            {/* Sparkles outside the oval */}
+          <Box
+            display="flex"
+            justifyContent="center"
+            position="relative"
+            width={{
+              xs: 200,
+              sm: 250,
+              md: 300,
+              lg: 350,
+              xl: 400,
+            }}
+            height={{
+              xs: 250,
+              sm: 300,
+              md: 350,
+              lg: 400,
+              xl: 450,
+            }}
+       
+          >
+            {/* Sparkles around the oval */}
             {sparkles.map((s, i) => (
               <Box
                 key={i}
@@ -72,18 +94,15 @@ function Body() {
             <Box
               sx={{
                 position: "relative",
-                width: 220,
-                height: 280,
+                width: "100%",
+                height: "100%",
                 borderRadius: "50% / 60%",
                 border: "4px solid #273627ff",
                 boxShadow: "0 12px 35px rgba(0,0,0,0.3)",
                 overflow: "hidden",
-                background: "radial-gradient(circle at center, rgba(255,255,255,0.08), transparent 70%)",
+                background:
+                  "radial-gradient(circle at center, rgba(255,255,255,0.08), transparent 70%)",
                 cursor: "pointer",
-                "&:hover img": {
-                  transform: "scale(1.05) rotate(1deg)",
-                  transition: "transform 0.5s ease-in-out",
-                },
               }}
             >
               <Box
@@ -95,39 +114,82 @@ function Body() {
                   height: "100%",
                   objectFit: "cover",
                   display: "block",
-                  transition: "transform 0.5s ease-in-out",
                 }}
               />
             </Box>
           </Box>
         </Grid>
 
-        {/* RIGHT SIDE - TEXT CONTENT */}
-        <Grid item xs={12} md={8}>
+        {/* RIGHT SIDE */}
+        <Grid
+          item
+          xs={12}
+          md={8}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center", // vertical centering
+            height: "100%", // match image height
+          }}
+        >
           <Stack spacing={2}>
-            <Typography variant="h3" fontWeight="bold">
+            <Typography variant="h2" fontWeight="bold" textAlign={"center"}>
               Katie Wunderle
             </Typography>
 
-            <Typography variant="h5" color="text.secondary">
+            <Typography
+              variant="h5"
+              color="text.secondary"
+              textAlign={"center"}
+            >
               Full-Stack Developer
             </Typography>
 
-            <Stack direction="row" spacing={2} mt={2}>
+            <Stack
+              direction="row"
+              spacing={2}
+              mt={2}
+              alignItems={"center"}
+              justifyContent={"center"}
+            >
               <Button variant="contained">Resume</Button>
               <Button variant="outlined">Contact</Button>
             </Stack>
 
-            <Stack direction="row" spacing={1} mt={2}>
-              <IconButton>
-                <GitHubIcon />
-              </IconButton>
-              <IconButton>
-                <LinkedInIcon />
-              </IconButton>
-              <IconButton>
-                <EmailIcon />
-              </IconButton>
+            <Stack
+              direction="row"
+              spacing={1}
+              mt={2}
+              alignItems={"center"}
+              justifyContent={"center"}
+            >
+              <a
+                href="https://github.com/kwunderle"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <IconButton>
+                  <GitHubIcon />
+                </IconButton>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/katharine-wunderle/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <IconButton>
+                  <LinkedInIcon />
+                </IconButton>
+              </a>
+              <a
+                href="mailto:katharinewunderle@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <IconButton>
+                  <EmailIcon />
+                </IconButton>
+              </a>
             </Stack>
           </Stack>
         </Grid>

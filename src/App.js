@@ -17,6 +17,7 @@ function App() {
     <>
       <Nav />
       <Body />
+      <Footer />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="About" element={<About />}></Route>

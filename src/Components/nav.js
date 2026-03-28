@@ -11,10 +11,10 @@ import Stack from "@mui/material/Stack";
 function Navigation() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" sx={{ backgroundColor: "#10490a" }}>  {/* Darker red with grey undertones */}
         <Toolbar>
 
-          {/* Avatar → Home लिंक */}
+          {/* Avatar → Home Link */}
           <Avatar
             component={Link}
             to="/"
@@ -22,13 +22,26 @@ function Navigation() {
               m: 1,
               cursor: "pointer",
               textDecoration: "none",
+              color: "#FFFFFF",  // White text for the avatar
+              borderColor: "#00FF00",  // Green border
+              borderWidth: 2,
+              ":hover": {
+                borderColor: "#FF4D4D",  // Light red hover effect for avatar
+              }
             }}
           >
             KW
           </Avatar>
 
           {/* Name */}
-          <Typography variant="h6" sx={{ fontWeight: 600 }}>
+          <Typography
+            variant="h6"
+            sx={{
+              fontWeight: 600,
+              color: "#FFFFFF",  // White text for better contrast
+              textTransform: "uppercase",
+            }}
+          >
             KATIE WUNDERLE
           </Typography>
 
@@ -40,8 +53,15 @@ function Navigation() {
             <Button
               component={Link}
               to="/About"
-              color="inherit"
-              sx={{ textTransform: "none", fontWeight: 500 }}
+              sx={{
+                textTransform: "none",
+                fontWeight: 500,
+                backgroundColor: "#000000",  // Black button background
+                color: "#FFFFFF",  // White text
+                "&:hover": {
+                  backgroundColor: "#333333",  // Darker gray on hover
+                }
+              }}
             >
               About
             </Button>
@@ -49,8 +69,15 @@ function Navigation() {
             <Button
               component={Link}
               to="/Projects"
-              color="inherit"
-              sx={{ textTransform: "none", fontWeight: 500 }}
+              sx={{
+                textTransform: "none",
+                fontWeight: 500,
+                backgroundColor: "#000000",  // Black button background
+                color: "#FFFFFF",  // White text
+                "&:hover": {
+                  backgroundColor: "#333333",  // Darker gray on hover
+                }
+              }}
             >
               Projects
             </Button>
@@ -59,11 +86,15 @@ function Navigation() {
               component={Link}
               to="/Contact"
               variant="contained"
-              color="secondary"
               sx={{
                 textTransform: "none",
                 fontWeight: 600,
+                backgroundColor: "#000000",  // Black button background
+                color: "#FFFFFF",  // White text
                 borderRadius: 2,
+                "&:hover": {
+                  backgroundColor: "#333333",  // Darker gray on hover
+                }
               }}
             >
               Contact
