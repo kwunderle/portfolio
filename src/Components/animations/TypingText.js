@@ -1,7 +1,13 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 
-export default function TypingText({ text, start = false, speed = 80, fontSize = "3rem", onComplete }) {
+export default function TypingText({
+  text,
+  start = false,
+  speed = 80,
+  fontSize = "3rem",
+  onComplete,
+}) {
   const [displayedText, setDisplayedText] = React.useState("");
   const startedRef = React.useRef(false); // ensures it only runs once initially
 
@@ -27,7 +33,10 @@ export default function TypingText({ text, start = false, speed = 80, fontSize =
   }, [start]);
 
   return (
-    <Box sx={{ position: "relative", display: "inline-block", cursor: "pointer" }} onClick={runTyping}>
+    <Box
+      sx={{ position: "relative", display: "inline-block", cursor: "pointer" }}
+      onClick={runTyping}
+    >
       <Typography
         fontWeight="bold"
         sx={{ fontSize, fontFamily: "monospace", visibility: "hidden" }}

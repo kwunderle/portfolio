@@ -1,61 +1,69 @@
 import React from "react";
+import Dialog from "@mui/material/Dialog";
+import Fade from "@mui/material/Fade";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import TypingText from "../Components/animations/TypingText";
 
-export default function Contact() {
+export default function ContactModal({ open, onClose, disableTitleAnimation = false }) {
   const [pageLoaded, setPageLoaded] = React.useState(false);
-  const [formData, setFormData] = React.useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const [formData, setFormData] = React.useState({ name: "", email: "", message: "" });
 
   React.useEffect(() => {
     const timer = setTimeout(() => setPageLoaded(true), 50);
     return () => clearTimeout(timer);
   }, []);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // add API call or email handling here
     alert(`Message sent!\nName: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`);
     setFormData({ name: "", email: "", message: "" });
   };
 
   return (
-    <Box sx={{ flex: 1, display: "flex", flexDirection: "column", p: 2 }}>
+    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth TransitionComponent={Fade} transitionDuration={400}>
       <Box
         sx={{
-          flex: 1,
+          position: "relative",
           p: { xs: 2, sm: 3, md: 4 },
+          backgroundColor: "#0e140d",
           border: "5px solid #273627ff",
           borderRadius: 3,
-          backgroundColor: "#0e140d",
-          maxWidth: 800,
-          margin: "0 auto",
         }}
       >
+        <IconButton
+          onClick={onClose}
+          sx={{ position: "absolute", top: 8, right: 8, color: "#7CFC00" }}
+        >
+          <CloseIcon />
+        </IconButton>
+
         <Stack spacing={{ xs: 1.5, md: 2 }} alignItems="center" sx={{ mb: 4 }}>
-          <TypingText
-            text="Contact Me"
-            speed={80}
-            fontSize={{ xs: "2rem", sm: "2.5rem", md: "3rem" }}
-            start={pageLoaded}
-          />
-          <Typography
-            sx={{ color: "#7CFC00", fontFamily: "monospace", textAlign: "center" }}
-          >
+          {disableTitleAnimation ? (
+            <Typography
+              fontWeight="bold"
+              fontFamily="monospace"
+              fontSize={{ xs: "2rem", sm: "2.5rem", md: "3rem" }}
+              color="#7CFC00"
+              textAlign="center"
+            >
+              Contact Me
+            </Typography>
+          ) : (
+            <TypingText text="Contact Me" speed={80} fontSize={{ xs: "2rem", sm: "2.5rem", md: "3rem" }} start={pageLoaded} />
+          )}
+          <Typography sx={{ color: "#7CFC00", fontFamily: "monospace", textAlign: "center" }}>
             Have a question or want to collaborate? Send me a message!
           </Typography>
         </Stack>
+
         <Box component="form" onSubmit={handleSubmit} sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
           <TextField
             label="Name"
@@ -106,24 +114,16 @@ export default function Contact() {
             }}
           />
 
-          <Button
-            type="submit"
-            variant="contained"
-            sx={{
-              alignSelf: "center",
-              backgroundColor: "#7CFC00",
-              color: "#0e140d",
-              fontFamily: "monospace",
-              fontWeight: "bold",
-              px: 5,
-              py: 1.5,
-              "&:hover": { backgroundColor: "#5edc00" },
-            }}
-          >
-            Send
-          </Button>
+          <Stack direction="row" spacing={2} justifyContent="center">
+            <Button type="submit" variant="contained">
+              Send
+            </Button>
+            <Button variant="outlined" onClick={onClose}>
+              Close
+            </Button>
+          </Stack>
         </Box>
       </Box>
-    </Box>
+    </Dialog>
   );
 }
