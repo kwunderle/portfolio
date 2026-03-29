@@ -5,16 +5,23 @@ module.exports = {
     entry: "./src/index.js",
     output: {
         path: path.resolve(__dirname, "public"),
-        filename: "main.js"
+        filename: "main.js",
+        publicPath: "/", 
     },
     target: "web",
     devServer: {
-        port: "3000",
-        static: "./public",
-        open: true,
-        hot: true,
-        liveReload: true
+    port: 3000,
+    static: {
+        directory: path.join(__dirname, "public"),
+        publicPath: '/', // Forces the server to serve static assets from the root
     },
+    hot: true,
+    open: true,
+    liveReload: true,
+    historyApiFallback: true, // Use boolean true instead of { index: "/" }
+},
+
+
     resolve: {
         extensions: ['.js', '.jsx', '.json']
     },

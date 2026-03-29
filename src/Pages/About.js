@@ -1,8 +1,11 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import TechIcons from "../Components/TechIcons";
+import TypingText from "../Components/animations/TypingText";
+import SubtitleRiseUp from "../Components/animations/SubtitleRiseUp";
 
 const sections = [
   {
@@ -28,15 +31,15 @@ const sections = [
 ];
 
 export default function About() {
+  const [pageLoaded, setPageLoaded] = React.useState(false);
+  const [typingDone, setTypingDone] = React.useState(false);
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => setPageLoaded(true), 50);
+    return () => clearTimeout(timer);
+  }, []);
   return (
-    <Box
-      sx={{
-        flex: 1,
-        display: "flex",
-        flexDirection: "column",
-        p: 2,
-      }}
-    >
+    <Box sx={{ flex: 1, display: "flex", flexDirection: "column", p: 2 }}>
       <Box
         sx={{
           flex: 1,
@@ -46,18 +49,21 @@ export default function About() {
           backgroundColor: "#0e140d",
         }}
       >
-        <Typography
-          variant="h3"
-          sx={{
-            fontFamily: "monospace",
-            color: "#7CFC00",
-            mb: 2,
-            textAlign: "center",
-          }}
-        >
-          About Me
-        </Typography>
-        <TechIcons />
+        <Stack spacing={{ xs: 1.5, md: 2 }} alignItems="center">
+          <TypingText
+            text="About Me"
+            speed={80}
+            fontSize={{ xs: "2rem", sm: "2.5rem", md: "3rem" }}
+            start={pageLoaded}
+            onComplete={() => setTypingDone(true)}
+          />
+          <SubtitleRiseUp
+            text={<TechIcons />}
+            show={typingDone}
+            fontSize={{ xs: "1.2rem", sm: "1.5rem", md: "1.8rem" }}
+          />
+        </Stack>
+
         {sections.map((section, index) => (
           <Grid
             container
@@ -66,12 +72,20 @@ export default function About() {
               xs: "column",
               md: index % 2 === 0 ? "row" : "row-reverse",
             }}
-            alignItems="flex-start"
+            alignItems="center"
             key={index}
-            sx={{ mb: 4 }}
+            sx={{ mb: 4, justifyContent: "center" }}
           >
-            {/* Image */}
-            <Grid item xs={12} md={4} sx={{ flexShrink: 0 }}>
+            <Grid
+              item
+              xs={12}
+              md={4}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                flexShrink: 0,
+              }}
+            >
               <Box
                 component="img"
                 src={section.img}
@@ -86,8 +100,12 @@ export default function About() {
               />
             </Grid>
 
-            {/* Text */}
-            <Grid item xs={12} md={8} sx={{ minWidth: 0, flex: 1 }}>
+            <Grid
+              item
+              xs={12}
+              md={8}
+              sx={{ minWidth: 0, flex: 1, maxWidth: 1000 }}
+            >
               <Typography
                 variant="h5"
                 sx={{

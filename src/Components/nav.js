@@ -46,7 +46,7 @@ function Navigation() {
           <Stack direction="row" spacing={2}>
             <Button
               component={Link}
-              to="/About"
+              to="/about"
               sx={{
                 textTransform: "none",
                 fontWeight: 500,
@@ -62,7 +62,7 @@ function Navigation() {
 
             <Button
               component={Link}
-              to="/Projects"
+              to="/projects"
               sx={{
                 textTransform: "none",
                 fontWeight: 500,
@@ -78,7 +78,7 @@ function Navigation() {
 
             <Button
               component={Link}
-              to="/Contact"
+              to="/contact"
               variant="contained"
               sx={{
                 textTransform: "none",
