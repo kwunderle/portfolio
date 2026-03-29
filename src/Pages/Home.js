@@ -29,7 +29,6 @@ const sparkles = [
 export default function Body() {
   const name = "Katie Wunderle";
   const typingSpeed = 80;
-
   const [displayedName, setDisplayedName] = React.useState("");
   const [typingDone, setTypingDone] = React.useState(false);
 
@@ -52,7 +51,7 @@ export default function Body() {
       direction={{ xs: "column", md: "row" }}
       spacing={{ xs: 3, sm: 6, md: 10 }}
       alignItems="center"
-      justifyContent={{ xs: "center", md: "flex-start" }}
+      justifyContent="flex-start"
     >
       <Grid
         item
