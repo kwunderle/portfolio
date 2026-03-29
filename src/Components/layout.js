@@ -8,12 +8,9 @@ export default function Layout() {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <Nav />
-
-      {/* This Box will stretch to fill available space */}
       <Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
         <Outlet />
       </Box>
-
       <Footer />
     </Box>
   );
