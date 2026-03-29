@@ -7,20 +7,16 @@ import Stack from "@mui/material/Stack";
 import IconButton from "@mui/material/IconButton";
 import { keyframes } from "@mui/system";
 import Face from "../assets/face.jpg";
-
-// Icons
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EmailIcon from "@mui/icons-material/Email";
 
-// Sparkle animation
 const sparkle = keyframes`
   0% { opacity: 0; transform: scale(0.5) translateY(0px); }
   50% { opacity: 1; transform: scale(1) translateY(-8px); }
   100% { opacity: 0; transform: scale(0.5) translateY(-16px); }
 `;
 
-// Sparkle positions around the oval
 const sparkles = [
   { top: "-10%", left: "10%", delay: 0 },
   { top: "-5%", left: "50%", delay: 0.5 },
@@ -30,172 +26,231 @@ const sparkles = [
   { top: "90%", left: "40%", delay: 0.8 },
 ];
 
-function Body() {
+export default function Body() {
+  const name = "Katie Wunderle";
+  const typingSpeed = 80;
+
+  const [displayedName, setDisplayedName] = React.useState("");
+  const [typingDone, setTypingDone] = React.useState(false);
+
+  React.useEffect(() => {
+    let i = 0;
+    const interval = setInterval(() => {
+      setDisplayedName(name.slice(0, i + 1));
+      i++;
+      if (i === name.length) {
+        clearInterval(interval);
+        setTypingDone(true);
+      }
+    }, typingSpeed);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <Box
-      
       sx={{
-        flexGrow: 1,
-        p: 4,
-        border: "5px solid #273627ff",
-        borderRadius: 3,
-        backgroundColor: "#0e140d",
-        m: 2,
-        mb: 0,
+        flex: 1,
         display: "flex",
         flexDirection: "column",
-        alignItems: "center",
-        textAlign: "center",
+        p: 2,
       }}
     >
-      <Grid container spacing={10} alignItems="center">
-        <Grid item xs={12} md={4}>
-          <Box
-            display="flex"
-            justifyContent="center"
-            position="relative"
-            width={{
-              xs: 200,
-              sm: 250,
-              md: 300,
-              lg: 350,
-              xl: 400,
-            }}
-            height={{
-              xs: 250,
-              sm: 300,
-              md: 350,
-              lg: 400,
-              xl: 450,
-            }}
-       
+      <Box
+        sx={{
+          flex: 1,
+          p: { xs: 2, sm: 3, md: 4 },
+          border: "5px solid #273627ff",
+          borderRadius: 3,
+          backgroundColor: "#0e140d",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Grid
+          container
+          direction={{ xs: "column", md: "row" }}
+          spacing={{ xs: 3, md: 10 }}
+          alignItems="center"
+          justifyContent={{ xs: "center", md: "flex-start" }}
+        >
+          <Grid
+            item
+            xs={12}
+            md={4}
+            sx={{ display: "flex", justifyContent: "center" }}
           >
-            {/* Sparkles around the oval */}
-            {sparkles.map((s, i) => (
-              <Box
-                key={i}
-                sx={{
-                  position: "absolute",
-                  width: 6,
-                  height: 6,
-                  borderRadius: "50%",
-                  backgroundColor: "#fff",
-                  boxShadow: "0 0 8px #fff",
-                  top: s.top,
-                  left: s.left,
-                  opacity: 0,
-                  animation: `${sparkle} 3s infinite`,
-                  animationDelay: `${s.delay}s`,
-                }}
-              />
-            ))}
-
-            {/* Outer Box: border + shadow */}
             <Box
-              sx={{
-                position: "relative",
-                width: "100%",
-                height: "100%",
-                borderRadius: "50% / 60%",
-                border: "4px solid #273627ff",
-                boxShadow: "0 12px 35px rgba(0,0,0,0.3)",
-                overflow: "hidden",
-                background:
-                  "radial-gradient(circle at center, rgba(255,255,255,0.08), transparent 70%)",
-                cursor: "pointer",
-              }}
+              display="flex"
+              justifyContent="center"
+              position="relative"
+              mx="auto"
+              width={{ xs: 160, sm: 200, md: 280, lg: 320, xl: 400 }}
+              height={{ xs: 200, sm: 240, md: 330, lg: 380, xl: 450 }}
             >
+              {sparkles.map((s, i) => (
+                <Box
+                  key={i}
+                  sx={{
+                    position: "absolute",
+                    width: 6,
+                    height: 6,
+                    borderRadius: "50%",
+                    backgroundColor: "#fff",
+                    boxShadow: "0 0 8px #fff",
+                    top: s.top,
+                    left: s.left,
+                    opacity: 0,
+                    animation: `${sparkle} 3s infinite`,
+                    animationDelay: `${s.delay}s`,
+                  }}
+                />
+              ))}
               <Box
-                component="img"
-                src={Face}
-                alt="Katie Wunderle"
                 sx={{
+                  position: "relative",
                   width: "100%",
                   height: "100%",
-                  objectFit: "cover",
-                  display: "block",
+                  borderRadius: "50% / 60%",
+                  border: "4px solid #273627ff",
+                  boxShadow: "0 12px 35px rgba(0,0,0,0.3)",
+                  overflow: "hidden",
+                  background:
+                    "radial-gradient(circle at center, rgba(255,255,255,0.08), transparent 70%)",
+                  cursor: "pointer",
                 }}
-              />
+              >
+                <Box
+                  component="img"
+                  src={Face}
+                  alt="Katie Wunderle"
+                  sx={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    display: "block",
+                  }}
+                />
+              </Box>
             </Box>
-          </Box>
-        </Grid>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            md={8}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              textAlign: "center",
+              height: "100%",
+            }}
+          >
+            <Stack spacing={{ xs: 1.5, md: 2 }}>
+              <Box sx={{ position: "relative", display: "inline-block" }}>
+                <Typography
+                  fontWeight="bold"
+                  sx={{
+                    fontSize: { xs: "1.8rem", sm: "2.2rem", md: "3rem" },
+                    fontFamily: "monospace",
+                    visibility: "hidden",
+                  }}
+                >
+                  {name}
+                </Typography>
 
-        {/* RIGHT SIDE */}
-        <Grid
-          item
-          xs={12}
-          md={8}
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center", // vertical centering
-            height: "100%", // match image height
-          }}
-        >
-          <Stack spacing={2}>
-            <Typography variant="h2" fontWeight="bold" textAlign={"center"}>
-              Katie Wunderle
-            </Typography>
-
-            <Typography
-              variant="h5"
-              color="text.secondary"
-              textAlign={"center"}
-            >
-              Full-Stack Developer
-            </Typography>
-
-            <Stack
-              direction="row"
-              spacing={2}
-              mt={2}
-              alignItems={"center"}
-              justifyContent={"center"}
-            >
-              <Button variant="contained">Resume</Button>
-              <Button variant="outlined">Contact</Button>
+                <Typography
+                  fontWeight="bold"
+                  sx={{
+                    fontSize: { xs: "1.8rem", sm: "2.2rem", md: "3rem" },
+                    fontFamily: "monospace",
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    whiteSpace: "nowrap",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  {displayedName}
+                  <Box
+                    component="span"
+                    sx={{
+                      ml: 0.5,
+                      width: "2px",
+                      height: "1em",
+                      display: "inline-block",
+                      backgroundColor: "#7CFC00",
+                      animation: "blink 1s infinite",
+                      "@keyframes blink": {
+                        "0%, 50%, 100%": { opacity: 1 },
+                        "25%, 75%": { opacity: 0 },
+                      },
+                    }}
+                  />
+                </Typography>
+              </Box>
+              <Typography
+                color="text.secondary"
+                sx={{
+                  fontSize: { xs: "1rem", sm: "1.2rem", md: "1.5rem" },
+                  fontFamily: "monospace",
+                  minHeight: "1.5em",
+                  opacity: typingDone ? 1 : 0,
+                  transform: typingDone
+                    ? "translateY(0px)"
+                    : "translateY(20px)",
+                  transition: "all 0.6s ease",
+                }}
+              >
+                Full-Stack Developer
+              </Typography>
+              <Stack
+                direction={{ xs: "column", sm: "row" }}
+                spacing={2}
+                mt={2}
+                alignItems="center"
+                justifyContent="center"
+                width="100%"
+              >
+                <Button variant="contained">Resume</Button>
+                <Button variant="outlined">Contact</Button>
+              </Stack>
+              <Stack direction="row" spacing={2} mt={2} justifyContent="center">
+                <a
+                  href="https://github.com/kwunderle"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <IconButton>
+                    <GitHubIcon />
+                  </IconButton>
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/katharine-wunderle/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <IconButton>
+                    <LinkedInIcon />
+                  </IconButton>
+                </a>
+                <a
+                  href="mailto:katharinewunderle@gmail.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <IconButton>
+                    <EmailIcon />
+                  </IconButton>
+                </a>
+              </Stack>
             </Stack>
-
-            <Stack
-              direction="row"
-              spacing={1}
-              mt={2}
-              alignItems={"center"}
-              justifyContent={"center"}
-            >
-              <a
-                href="https://github.com/kwunderle"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <IconButton>
-                  <GitHubIcon />
-                </IconButton>
-              </a>
-              <a
-                href="https://www.linkedin.com/in/katharine-wunderle/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <IconButton>
-                  <LinkedInIcon />
-                </IconButton>
-              </a>
-              <a
-                href="mailto:katharinewunderle@gmail.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <IconButton>
-                  <EmailIcon />
-                </IconButton>
-              </a>
-            </Stack>
-          </Stack>
+          </Grid>
         </Grid>
-      </Grid>
+      </Box>
     </Box>
   );
 }
-
-export default Body;

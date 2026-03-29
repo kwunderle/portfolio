@@ -10,11 +10,9 @@ import Stack from "@mui/material/Stack";
 
 function Navigation() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ backgroundColor: "#10490a" }}>  {/* Darker red with grey undertones */}
+    <Box>
+      <AppBar position="static" sx={{ backgroundColor: "#10490a" }}>
         <Toolbar>
-
-          {/* Avatar → Home Link */}
           <Avatar
             component={Link}
             to="/"
@@ -22,33 +20,29 @@ function Navigation() {
               m: 1,
               cursor: "pointer",
               textDecoration: "none",
-              color: "#FFFFFF",  // White text for the avatar
-              borderColor: "#00FF00",  // Green border
+              color: "#FFFFFF",
+              borderColor: "#00FF00",
               borderWidth: 2,
               ":hover": {
-                borderColor: "#FF4D4D",  // Light red hover effect for avatar
-              }
+                borderColor: "#FF4D4D",
+              },
             }}
           >
             KW
           </Avatar>
-
-          {/* Name */}
           <Typography
             variant="h6"
             sx={{
               fontWeight: 600,
-              color: "#FFFFFF",  // White text for better contrast
+              color: "#FFFFFF",
               textTransform: "uppercase",
             }}
           >
             KATIE WUNDERLE
           </Typography>
 
-          {/* Spacer (pushes nav right) */}
           <Box sx={{ flexGrow: 1 }} />
 
-          {/* Right-aligned nav */}
           <Stack direction="row" spacing={2}>
             <Button
               component={Link}
@@ -56,11 +50,11 @@ function Navigation() {
               sx={{
                 textTransform: "none",
                 fontWeight: 500,
-                backgroundColor: "#000000",  // Black button background
-                color: "#FFFFFF",  // White text
+                backgroundColor: "#000000",
+                color: "#FFFFFF",
                 "&:hover": {
-                  backgroundColor: "#333333",  // Darker gray on hover
-                }
+                  backgroundColor: "#333333",
+                },
               }}
             >
               About
@@ -72,11 +66,11 @@ function Navigation() {
               sx={{
                 textTransform: "none",
                 fontWeight: 500,
-                backgroundColor: "#000000",  // Black button background
-                color: "#FFFFFF",  // White text
+                backgroundColor: "#000000",
+                color: "#FFFFFF",
                 "&:hover": {
-                  backgroundColor: "#333333",  // Darker gray on hover
-                }
+                  backgroundColor: "#333333",
+                },
               }}
             >
               Projects
@@ -89,18 +83,17 @@ function Navigation() {
               sx={{
                 textTransform: "none",
                 fontWeight: 600,
-                backgroundColor: "#000000",  // Black button background
-                color: "#FFFFFF",  // White text
+                backgroundColor: "#000000",
+                color: "#FFFFFF",
                 borderRadius: 2,
                 "&:hover": {
-                  backgroundColor: "#333333",  // Darker gray on hover
-                }
+                  backgroundColor: "#333333",
+                },
               }}
             >
               Contact
             </Button>
           </Stack>
-
         </Toolbar>
       </AppBar>
     </Box>

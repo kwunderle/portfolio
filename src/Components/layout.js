@@ -1,14 +1,20 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Box from "@mui/material/Box";
-import navbar from "./Navigation/navbar";
+import Nav from "./nav";
+import Footer from "./footer";
 
-function layout() {
+export default function Layout() {
   return (
-    <main>
-      <Outlet/>
-    </main>
+    <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+      <Nav />
+
+      {/* This Box will stretch to fill available space */}
+      <Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
+        <Outlet />
+      </Box>
+
+      <Footer />
+    </Box>
   );
 }
-
-export default layout;
