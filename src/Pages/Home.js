@@ -133,7 +133,7 @@ export default function Home() {
               show={typingDone}
               fontSize={{ xs: "1rem", sm: "1.2rem", md: "1.5rem" }}
             />
-            <Stack direction={{ xs: "column", sm: "row" }} spacing={2} mt={2} justifyContent="center">
+            <Stack direction="row" spacing={2} mt={2} justifyContent="center">
               <Button variant="contained" onClick={() => setOpenResume(true)}>
                 Resume
               </Button>

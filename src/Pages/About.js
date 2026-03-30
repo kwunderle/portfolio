@@ -7,11 +7,13 @@ import TechIcons from "../Components/TechIcons";
 import TypingText from "../Components/animations/TypingText";
 import SubtitleRiseUp from "../Components/animations/SubtitleRiseUp";
 
+import SPMain from "../assets/SPM.jpg";
+
 const sections = [
   {
     title: "Where It Started",
     text: `My first computer was a Mac II, and from an early age I was encouraged to explore software, read documentation, and figure things out on my own. That early exposure built the foundation for how I approach technology today—curious, hands-on, and always learning.`,
-    img: "https://picsum.photos/600/400?random=1",
+    img: SPMain,
   },
   {
     title: "Creative Roots",
@@ -38,6 +40,7 @@ export default function About() {
     const timer = setTimeout(() => setPageLoaded(true), 50);
     return () => clearTimeout(timer);
   }, []);
+
   return (
     <Box sx={{ flex: 1, display: "flex", flexDirection: "column", p: 2 }}>
       <Box

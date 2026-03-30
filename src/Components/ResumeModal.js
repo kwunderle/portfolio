@@ -1,6 +1,5 @@
 import React from "react";
 import Dialog from "@mui/material/Dialog";
-import Fade from "@mui/material/Fade";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
@@ -15,7 +14,6 @@ export default function ResumeModal({ open, onClose }) {
       onClose={onClose}
       maxWidth="md"
       fullWidth
-      TransitionComponent={Fade}
       transitionDuration={400}
     >
       <Box
@@ -47,29 +45,29 @@ export default function ResumeModal({ open, onClose }) {
         </Typography>
 
         <Box
-  component="iframe"
-  src="/resume.pdf"
-  sx={{
-    width: "100%",
-    height: { xs: 400, sm: 500, md: 600 },
-    border: "2px solid #273627ff",
-    borderRadius: 2,
-    mb: 2,
-  }}
-/>
+          component="iframe"
+          src="/resume.pdf"
+          sx={{
+            width: "100%",
+            height: { xs: 400, sm: 500, md: 600 },
+            border: "2px solid #273627ff",
+            borderRadius: 2,
+            mb: 2,
+          }}
+        />
 
-<Stack direction="row" spacing={2} justifyContent="center">
-  <Button
-  variant="contained"
-  href="/resume.pdf"
-  download="Katie_Wunderle_Resume.pdf"
->
-  Download
-</Button>
-  <Button variant="outlined" onClick={onClose}>
-    Close
-  </Button>
-</Stack>
+        <Stack direction="row" spacing={2} justifyContent="center">
+          <Button
+            variant="contained"
+            href="/resume.pdf"
+            download="Katie_Wunderle_Resume.pdf"
+          >
+            Download
+          </Button>
+          <Button variant="outlined" onClick={onClose}>
+            Close
+          </Button>
+        </Stack>
       </Box>
     </Dialog>
   );
