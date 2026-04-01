@@ -9,22 +9,46 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import TypingText from "../Components/animations/TypingText";
+import { httpsCallable } from "firebase/functions";
+import { functions } from "../firebase";
 
 export default function ContactModal({ open, onClose, disableTitleAnimation = false }) {
   const [pageLoaded, setPageLoaded] = React.useState(false);
-  const [formData, setFormData] = React.useState({ name: "", email: "", message: "" });
+  const [formData, setFormData] = React.useState({
+    name: "",
+    email: "",
+    message: "",
+    company: "", // honeypot field
+  });
 
   React.useEffect(() => {
     const timer = setTimeout(() => setPageLoaded(true), 50);
     return () => clearTimeout(timer);
   }, []);
 
-  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(`Message sent!\nName: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`);
-    setFormData({ name: "", email: "", message: "" });
+
+    try {
+      // Honeypot: silently ignore if filled
+      if (formData.company) {
+        setFormData({ name: "", email: "", message: "", company: "" });
+        return;
+      }
+
+      const sendEmail = httpsCallable(functions, "sendContactEmail");
+      await sendEmail(formData);
+
+      alert("Message sent!");
+      setFormData({ name: "", email: "", message: "", company: "" });
+      onClose();
+    } catch (err) {
+      console.error(err);
+      alert("Failed to send message");
+    }
   };
 
   return (
@@ -57,7 +81,12 @@ export default function ContactModal({ open, onClose, disableTitleAnimation = fa
               Contact Me
             </Typography>
           ) : (
-            <TypingText text="Contact Me" speed={80} fontSize={{ xs: "2rem", sm: "2.5rem", md: "3rem" }} start={pageLoaded} />
+            <TypingText
+              text="Contact Me"
+              speed={80}
+              fontSize={{ xs: "2rem", sm: "2.5rem", md: "3rem" }}
+              start={pageLoaded}
+            />
           )}
           <Typography sx={{ color: "#7CFC00", fontFamily: "monospace", textAlign: "center" }}>
             Have a question or want to collaborate? Send me a message!
@@ -65,6 +94,14 @@ export default function ContactModal({ open, onClose, disableTitleAnimation = fa
         </Stack>
 
         <Box component="form" onSubmit={handleSubmit} sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+          {/* Honeypot field */}
+          <TextField
+            name="company"
+            value={formData.company}
+            onChange={handleChange}
+            sx={{ display: "none" }}
+          />
+
           <TextField
             label="Name"
             name="name"
@@ -80,6 +117,7 @@ export default function ContactModal({ open, onClose, disableTitleAnimation = fa
               "&:hover fieldset": { borderColor: "#7CFC00" },
             }}
           />
+
           <TextField
             label="Email"
             type="email"
@@ -96,6 +134,7 @@ export default function ContactModal({ open, onClose, disableTitleAnimation = fa
               "&:hover fieldset": { borderColor: "#7CFC00" },
             }}
           />
+
           <TextField
             label="Message"
             name="message"

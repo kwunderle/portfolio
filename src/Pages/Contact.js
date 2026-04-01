@@ -23,11 +23,22 @@ export default function Contact() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // add API call or email handling here
-    alert(`Message sent!\nName: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`);
-    setFormData({ name: "", email: "", message: "" });
+  
+    try {
+      const functions = getFunctions();
+      const sendEmail = httpsCallable(functions, "sendContactEmail");
+  
+      await sendEmail(formData);
+  
+      alert("Message sent!");
+      setFormData({ name: "", email: "", message: "" });
+      onClose();
+    } catch (err) {
+      console.error(err);
+      alert("Failed to send message");
+    }
   };
 
   return (
