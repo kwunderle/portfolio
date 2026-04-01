@@ -12,7 +12,11 @@ import TypingText from "../Components/animations/TypingText";
 import { httpsCallable } from "firebase/functions";
 import { functions } from "../firebase";
 
-export default function ContactModal({ open, onClose, disableTitleAnimation = false }) {
+export default function ContactModal({
+  open,
+  onClose,
+  disableTitleAnimation = false,
+}) {
   const [pageLoaded, setPageLoaded] = React.useState(false);
   const [formData, setFormData] = React.useState({
     name: "",
@@ -33,18 +37,25 @@ export default function ContactModal({ open, onClose, disableTitleAnimation = fa
     e.preventDefault();
 
     try {
-      // Honeypot: silently ignore if filled
-      if (formData.company) {
-        setFormData({ name: "", email: "", message: "", company: "" });
-        return;
+      const response = await fetch(
+        "https://us-central1-portfolio-4c6cb.cloudfunctions.net/sendContactEmail",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        },
+      );
+
+      const result = await response.json();
+
+      if (result.success) {
+        alert("Message sent!");
+        setFormData({ name: "", email: "", message: "" });
+        onClose();
+      } else {
+        console.error(result.error);
+        alert("Failed to send message");
       }
-
-      const sendEmail = httpsCallable(functions, "sendContactEmail");
-      await sendEmail(formData);
-
-      alert("Message sent!");
-      setFormData({ name: "", email: "", message: "", company: "" });
-      onClose();
     } catch (err) {
       console.error(err);
       alert("Failed to send message");
@@ -52,7 +63,13 @@ export default function ContactModal({ open, onClose, disableTitleAnimation = fa
   };
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth TransitionComponent={Fade} transitionDuration={400}>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      maxWidth="sm"
+      fullWidth
+      transitionDuration={400}
+    >
       <Box
         sx={{
           position: "relative",
@@ -88,12 +105,22 @@ export default function ContactModal({ open, onClose, disableTitleAnimation = fa
               start={pageLoaded}
             />
           )}
-          <Typography sx={{ color: "#7CFC00", fontFamily: "monospace", textAlign: "center" }}>
+          <Typography
+            sx={{
+              color: "#7CFC00",
+              fontFamily: "monospace",
+              textAlign: "center",
+            }}
+          >
             Have a question or want to collaborate? Send me a message!
           </Typography>
         </Stack>
 
-        <Box component="form" onSubmit={handleSubmit} sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          sx={{ display: "flex", flexDirection: "column", gap: 3 }}
+        >
           {/* Honeypot field */}
           <TextField
             name="company"
