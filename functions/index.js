@@ -1,16 +1,17 @@
 const functions = require("firebase-functions");
 const {Resend} = require("resend");
-const cors = require("cors")({origin: true});
+const cors = require("cors");
 
-exports.sendContactEmail = functions.https.onRequest(async (req, res) => {
-  cors(req, res, async () => {
-    // eslint-disable-next-line max-len
-    if (req.method !== "POST") return res.status(405).send("Method not allowed");
+const corsHandler = cors({origin: true});
+
+exports.sendContactEmail = functions.https.onRequest((req, res) => {
+  corsHandler(req, res, async () => {
+    if (req.method !== "POST") return res.status(405).send("Method No Allowed");
 
     const {name, email, message, company} = req.body;
     const resend = new Resend(process.env.RESEND_API_KEY);
 
-    if (company) return res.json({success: true}); // Honeypot
+    if (company) return res.json({success: true}); // honeypot
 
     if (!name || !email || !message) {
       return res.status(400).json({success: false, error: "Missing fields"});
@@ -25,7 +26,7 @@ exports.sendContactEmail = functions.https.onRequest(async (req, res) => {
         html: `
           <h3>New Contact Message</h3>
           <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Email:</strong>: ${email}</p>
           <p><strong>Message:</strong></p>
           <p>${message}</p>
         `,

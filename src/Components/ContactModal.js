@@ -9,29 +9,17 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import TypingText from "../Components/animations/TypingText";
-import { httpsCallable } from "firebase/functions";
-import { functions } from "../firebase";
 
-export default function ContactModal({
-  open,
-  onClose,
-  disableTitleAnimation = false,
-}) {
+export default function ContactModal({ open, onClose, disableTitleAnimation = false }) {
   const [pageLoaded, setPageLoaded] = React.useState(false);
-  const [formData, setFormData] = React.useState({
-    name: "",
-    email: "",
-    message: "",
-    company: "", // honeypot field
-  });
+  const [formData, setFormData] = React.useState({ name: "", email: "", message: "", company: "" }); // company = honeypot
 
   React.useEffect(() => {
     const timer = setTimeout(() => setPageLoaded(true), 50);
     return () => clearTimeout(timer);
   }, []);
 
-  const handleChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,14 +31,14 @@ export default function ContactModal({
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formData),
-        },
+        }
       );
 
       const result = await response.json();
 
       if (result.success) {
         alert("Message sent!");
-        setFormData({ name: "", email: "", message: "" });
+        setFormData({ name: "", email: "", message: "", company: "" });
         onClose();
       } else {
         console.error(result.error);
@@ -63,13 +51,7 @@ export default function ContactModal({
   };
 
   return (
-    <Dialog
-      open={open}
-      onClose={onClose}
-      maxWidth="sm"
-      fullWidth
-      transitionDuration={400}
-    >
+    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth TransitionComponent={Fade} transitionDuration={400}>
       <Box
         sx={{
           position: "relative",
@@ -98,37 +80,14 @@ export default function ContactModal({
               Contact Me
             </Typography>
           ) : (
-            <TypingText
-              text="Contact Me"
-              speed={80}
-              fontSize={{ xs: "2rem", sm: "2.5rem", md: "3rem" }}
-              start={pageLoaded}
-            />
+            <TypingText text="Contact Me" speed={80} fontSize={{ xs: "2rem", sm: "2.5rem", md: "3rem" }} start={pageLoaded} />
           )}
-          <Typography
-            sx={{
-              color: "#7CFC00",
-              fontFamily: "monospace",
-              textAlign: "center",
-            }}
-          >
+          <Typography sx={{ color: "#7CFC00", fontFamily: "monospace", textAlign: "center" }}>
             Have a question or want to collaborate? Send me a message!
           </Typography>
         </Stack>
 
-        <Box
-          component="form"
-          onSubmit={handleSubmit}
-          sx={{ display: "flex", flexDirection: "column", gap: 3 }}
-        >
-          {/* Honeypot field */}
-          <TextField
-            name="company"
-            value={formData.company}
-            onChange={handleChange}
-            sx={{ display: "none" }}
-          />
-
+        <Box component="form" onSubmit={handleSubmit} sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
           <TextField
             label="Name"
             name="name"
@@ -144,7 +103,6 @@ export default function ContactModal({
               "&:hover fieldset": { borderColor: "#7CFC00" },
             }}
           />
-
           <TextField
             label="Email"
             type="email"
@@ -161,7 +119,6 @@ export default function ContactModal({
               "&:hover fieldset": { borderColor: "#7CFC00" },
             }}
           />
-
           <TextField
             label="Message"
             name="message"
@@ -178,6 +135,16 @@ export default function ContactModal({
               fieldset: { borderColor: "#7CFC00" },
               "&:hover fieldset": { borderColor: "#7CFC00" },
             }}
+          />
+
+          {/* Hidden honeypot field */}
+          <input
+            type="text"
+            name="company"
+            value={formData.company}
+            onChange={handleChange}
+            style={{ display: "none" }}
+            autoComplete="off"
           />
 
           <Stack direction="row" spacing={2} justifyContent="center">
