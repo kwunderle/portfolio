@@ -5,6 +5,8 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import TypingText from "../Components/animations/TypingText";
+import { functions } from "../firebase";
+import { httpsCallable } from "firebase/functions";
 
 export default function Contact() {
   const [pageLoaded, setPageLoaded] = React.useState(false);
@@ -20,14 +22,21 @@ export default function Contact() {
   }, []);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+  if (name === "name") {
+    setFormData((formData) => ({ name: value, email: formData.email, message: formData.message }));
+  } else if (name === "email") {
+    setFormData((formData) => ({ name: formData.name, email: value, message: formData.message }));
+  } else if (name === "message") {
+    setFormData((formData) => ({ name: formData.name, email: formData.email, message: value }));
+  }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
   
     try {
-      const functions = getFunctions();
       const sendEmail = httpsCallable(functions, "sendContactEmail");
   
       await sendEmail(formData);
@@ -105,7 +114,7 @@ export default function Contact() {
             value={formData.message}
             onChange={handleChange}
             required
-            multiline
+            // multiline
             rows={6}
             fullWidth
             variant="outlined"

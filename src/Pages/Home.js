@@ -137,9 +137,9 @@ export default function Home() {
               <Button variant="contained" onClick={() => setOpenResume(true)}>
                 Resume
               </Button>
-              <Button variant="outlined" onClick={() => setOpenContact(true)}>
+              {/* <Button variant="outlined" onClick={() => setOpenContact(true)}>
                 Contact
-              </Button>
+              </Button> */}
             </Stack>
             <Stack direction="row" spacing={2} mt={2} justifyContent="center">
               <a href="https://github.com/kwunderle" target="_blank" rel="noopener noreferrer">

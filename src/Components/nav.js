@@ -81,6 +81,7 @@ function Navigation() {
               to="/contact"
               variant="contained"
               sx={{
+                // display: "none",
                 textTransform: "none",
                 fontWeight: 600,
                 backgroundColor: "#000000",

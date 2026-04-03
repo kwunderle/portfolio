@@ -12,7 +12,7 @@ import TypingText from "../Components/animations/TypingText";
 
 export default function ContactModal({ open, onClose, disableTitleAnimation = false }) {
   const [pageLoaded, setPageLoaded] = React.useState(false);
-  const [formData, setFormData] = React.useState({ name: "", email: "", message: "", company: "" }); // company = honeypot
+  const [formData, setFormData] = React.useState({ name: "", email: "", message: ""}); //  = honeypot
 
   React.useEffect(() => {
     const timer = setTimeout(() => setPageLoaded(true), 50);
@@ -38,7 +38,7 @@ export default function ContactModal({ open, onClose, disableTitleAnimation = fa
 
       if (result.success) {
         alert("Message sent!");
-        setFormData({ name: "", email: "", message: "", company: "" });
+        setFormData({ name: "", email: "", message: "" });
         onClose();
       } else {
         console.error(result.error);
@@ -51,7 +51,7 @@ export default function ContactModal({ open, onClose, disableTitleAnimation = fa
   };
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth TransitionComponent={Fade} transitionDuration={400}>
+    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth transitionDuration={400}>
       <Box
         sx={{
           position: "relative",
@@ -137,15 +137,7 @@ export default function ContactModal({ open, onClose, disableTitleAnimation = fa
             }}
           />
 
-          {/* Hidden honeypot field */}
-          <input
-            type="text"
-            name="company"
-            value={formData.company}
-            onChange={handleChange}
-            style={{ display: "none" }}
-            autoComplete="off"
-          />
+          
 
           <Stack direction="row" spacing={2} justifyContent="center">
             <Button type="submit" variant="contained">
