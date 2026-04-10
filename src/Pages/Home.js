@@ -52,7 +52,7 @@ export default function Home() {
         alignItems="center"
         justifyContent="flex-start"
       >
-        <Grid item xs={12} md={4} sx={{ display: "flex", justifyContent: "center" }}>
+        <Grid sx={{ display: "flex", justifyContent: "center" }}>
           <Box
             display="flex"
             justifyContent="center"
@@ -108,9 +108,6 @@ export default function Home() {
         </Grid>
 
         <Grid
-          item
-          xs={12}
-          md={8}
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -137,9 +134,9 @@ export default function Home() {
               <Button variant="contained" onClick={() => setOpenResume(true)}>
                 Resume
               </Button>
-              {/* <Button variant="outlined" onClick={() => setOpenContact(true)}>
+              <Button variant="outlined" onClick={() => setOpenContact(true)}>
                 Contact
-              </Button> */}
+              </Button>
             </Stack>
             <Stack direction="row" spacing={2} mt={2} justifyContent="center">
               <a href="https://github.com/kwunderle" target="_blank" rel="noopener noreferrer">

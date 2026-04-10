@@ -5,8 +5,6 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import TypingText from "../Components/animations/TypingText";
-import { functions } from "../firebase";
-import { httpsCallable } from "firebase/functions";
 
 export default function Contact() {
   const [pageLoaded, setPageLoaded] = React.useState(false);
@@ -21,29 +19,32 @@ export default function Contact() {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-  if (name === "name") {
-    setFormData((formData) => ({ name: value, email: formData.email, message: formData.message }));
-  } else if (name === "email") {
-    setFormData((formData) => ({ name: formData.name, email: value, message: formData.message }));
-  } else if (name === "message") {
-    setFormData((formData) => ({ name: formData.name, email: formData.email, message: value }));
-  }
-  };
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
-      const sendEmail = httpsCallable(functions, "sendContactEmail");
-  
-      await sendEmail(formData);
-  
-      alert("Message sent!");
-      setFormData({ name: "", email: "", message: "" });
-      onClose();
+      const response = await fetch(
+        "https://us-central1-portfolio-4c6cb.cloudfunctions.net/sendFormEmail",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ data: formData }),
+        },
+      );
+
+      const result = await response.json();
+
+      if (result.success) {
+        alert("Message sent!");
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        alert("Failed to send message: " + result.error);
+      }
     } catch (err) {
       console.error(err);
       alert("Failed to send message");
@@ -71,18 +72,27 @@ export default function Contact() {
             start={pageLoaded}
           />
           <Typography
-            sx={{ color: "#7CFC00", fontFamily: "monospace", textAlign: "center" }}
+            sx={{
+              color: "#7CFC00",
+              fontFamily: "monospace",
+              textAlign: "center",
+            }}
           >
             Have a question or want to collaborate? Send me a message!
           </Typography>
         </Stack>
-        <Box component="form" onSubmit={handleSubmit} sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          sx={{ display: "flex", flexDirection: "column", gap: 3 }}
+        >
           <TextField
             label="Name"
             name="name"
             value={formData.name}
             onChange={handleChange}
             required
+            autoComplete="on"
             fullWidth
             variant="outlined"
             sx={{
@@ -99,6 +109,7 @@ export default function Contact() {
             value={formData.email}
             onChange={handleChange}
             required
+            autoComplete="on"
             fullWidth
             variant="outlined"
             sx={{
@@ -114,7 +125,7 @@ export default function Contact() {
             value={formData.message}
             onChange={handleChange}
             required
-            // multiline
+            multiline
             rows={6}
             fullWidth
             variant="outlined"

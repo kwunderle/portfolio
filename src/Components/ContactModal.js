@@ -25,14 +25,16 @@ export default function ContactModal({ open, onClose, disableTitleAnimation = fa
     e.preventDefault();
 
     try {
-      const response = await fetch(
-        "https://us-central1-portfolio-4c6cb.cloudfunctions.net/sendContactEmail",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        }
-      );
+    const response = await fetch(
+        "https://us-central1-portfolio-4c6cb.cloudfunctions.net/sendFormEmail",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ data: formData }),
+      }
+    );
 
       const result = await response.json();
 
