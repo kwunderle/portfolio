@@ -138,9 +138,6 @@ export default function ContactModal({ open, onClose, disableTitleAnimation = fa
               "&:hover fieldset": { borderColor: "#7CFC00" },
             }}
           />
-
-          
-
           <Stack direction="row" spacing={2} justifyContent="center">
             <Button type="submit" variant="contained">
               Send
