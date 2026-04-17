@@ -4,6 +4,7 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import ProjectCard from "../Components/ProjectCard";
 import TypingText from "../Components/animations/TypingText";
+import LCHS from "../../public/images/LCHS.png";
 
 const projects = [
   {
@@ -14,10 +15,10 @@ const projects = [
     codeLink: "#",
   },
   {
-    title: "LCHS.org",
-    description: "The Lorain History Society website rebuild on wordpress",
-    image: "https://picsum.photos/400/200?random=12",
-    viewLink: "#",
+    title: "Lorain County Historical Society",
+    description: "Custom WordPress build with widget integration for email newsletters, tour and event bookings",
+    image: LCHS,
+    viewLink: "https://lchs.org/",
     codeLink: "#",
   },
   {

@@ -7,28 +7,31 @@ import TechIcons from "../Components/TechIcons";
 import TypingText from "../Components/animations/TypingText";
 import SubtitleRiseUp from "../Components/animations/SubtitleRiseUp";
 
-import SPMain from "../assets/SPM.jpg";
+import Caverns from "../../public/images/caverns.jpg"
+import GradCap from "../../public/images/helloWorldGradCap.jpg";
+import JavaPeace from "../../public/images/JavaPeace.jpg";
+import GradSmile from "../../public/images/GradSmile.jpg";
 
 const sections = [
   {
     title: "Where It Started",
     text: `My first computer was a Mac II, and from an early age I was encouraged to explore software, read documentation, and figure things out on my own. That early exposure built the foundation for how I approach technology today—curious, hands-on, and always learning.`,
-    img: SPMain,
+    img: Caverns,
   },
   {
     title: "Creative Roots",
     text: `I’ve always been drawn to art and graphic design. Before I ever thought of myself as a developer, I was focused on visuals—layouts, color, and user experience. That creative background still shapes how I build applications, blending function with design.`,
-    img: "https://picsum.photos/600/400?random=2",
+    img: JavaPeace,
   },
   {
     title: "Early Web Development",
     text: `As a kid, I built websites on platforms like Angelfire and Geocities, diving deep into HTML and CSS to customize everything. I carried that into customizing profiles and pages on MySpace and Neopets, where I learned how powerful code could be for self-expression.`,
-    img: "https://picsum.photos/600/400?random=3",
+    img: GradCap,
   },
   {
     title: "Full-Stack Mindset",
     text: `Today, I approach development as a full-stack engineer—comfortable working across the entire application. From building responsive frontends to designing backend logic, I enjoy connecting all the pieces into a cohesive product.`,
-    img: "https://picsum.photos/600/400?random=4",
+    img: GradSmile,
   },
 ];
 
@@ -61,7 +64,7 @@ export default function About() {
             onComplete={() => setTypingDone(true)}
           />
           <SubtitleRiseUp
-            text={<TechIcons />}
+            text="I love art and technology"
             show={typingDone}
             fontSize={{ xs: "1.2rem", sm: "1.5rem", md: "1.8rem" }}
           />
