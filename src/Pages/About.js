@@ -11,28 +11,29 @@ import Caverns from "../../public/images/caverns.jpg"
 import GradCap from "../../public/images/helloWorldGradCap.jpg";
 import JavaPeace from "../../public/images/JavaPeace.jpg";
 import GradSmile from "../../public/images/GradSmile.jpg";
+import Cave from "../../public/images/frogcave.png";
 
 const sections = [
   {
-    title: "Where It Started",
-    text: `My first computer was a Mac II, and from an early age I was encouraged to explore software, read documentation, and figure things out on my own. That early exposure built the foundation for how I approach technology today—curious, hands-on, and always learning.`,
+    title: "Creative Roots",
+    text: `My first computer was a Mac II, and when I was old enough to sit at the helm, public use of the internet was on the rise and I watched it grow into an everyday necessity. From an early age I was encouraged to explore software, read documentation, and troubleshoot network and hardware issues. I have always been interested in graphics and games and how creativity and technology work together to bring life to digital art and stories. That early exposure built the foundation for how I approach development today; curious, innovative, and resourceful.`,
     img: Caverns,
   },
   {
-    title: "Creative Roots",
-    text: `I’ve always been drawn to art and graphic design. Before I ever thought of myself as a developer, I was focused on visuals—layouts, color, and user experience. That creative background still shapes how I build applications, blending function with design.`,
-    img: JavaPeace,
-  },
-  {
     title: "Early Web Development",
-    text: `As a kid, I built websites on platforms like Angelfire and Geocities, diving deep into HTML and CSS to customize everything. I carried that into customizing profiles and pages on MySpace and Neopets, where I learned how powerful code could be for self-expression.`,
-    img: GradCap,
+    text: `Before I ever thought of myself as a developer, I was focused on layouts, color, and user experience. That creative background still shapes how I build applications, blending function with design. Growing up, I customized pages in browser based games and built sites on content management platforms like Angelfire and Geocities, diving deep into static HTML and CSS to learn how to use code for artistic expression. I carried that knowledge into using frameworks and component libraries as I learned backend languages and database concepts. This allows me to solve complex problems with dynamic solutions along with secure data operations and state management, while providing user interface functionality that is polished, efficient, and accessible.`,
+    img: Cave,
   },
   {
     title: "Full-Stack Mindset",
-    text: `Today, I approach development as a full-stack engineer—comfortable working across the entire application. From building responsive frontends to designing backend logic, I enjoy connecting all the pieces into a cohesive product.`,
-    img: GradSmile,
+    text: `Today, as a full-stack engineer, I am comfortable working across an entire application. From building responsive layouts to designing backend logic, I enjoy connecting all the pieces into a cohesive product. Web and software development gives me the opportunity to take on roles such as artist, detective, data scientist, and mathematician.`,
+    img: GradCap,
   },
+  // {
+  //   title: "Full-Stack Mindset",
+  //   text: `Today, I approach development as a full-stack engineer—comfortable working across the entire application. From building responsive frontends to designing backend logic, I enjoy connecting all the pieces into a cohesive product.`,
+  //   img: GradSmile,
+  // },
 ];
 
 export default function About() {
