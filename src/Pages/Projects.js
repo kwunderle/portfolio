@@ -5,36 +5,37 @@ import Stack from "@mui/material/Stack";
 import ProjectCard from "../Components/ProjectCard";
 import TypingText from "../Components/animations/TypingText";
 import LCHS from "../../public/images/LCHS.png";
+import Folder from "../../public/images/folder.png";
 
 const projects = [
   {
-    title: "Crimechester",
-    description: "Mystery solving detective game with interactive graphics.",
-    image: "https://picsum.photos/400/200?random=11",
-    viewLink: "#",
-    codeLink: "#",
-  },
-  {
     title: "Lorain County Historical Society",
-    description: "Custom WordPress build with widget integration for email newsletters, tour and event bookings",
+    description: "Custom WordPress build with widget integration for email newsletters, tours, event bookings, membership fees and donations, and e-commerce gift shop.",
     image: LCHS,
     viewLink: "https://lchs.org/",
     codeLink: "#",
   },
   {
-    title: "Tarot Reader",
-    description: "Learn card meanings and generate readings.",
-    image: "https://picsum.photos/400/200?random=13",
-    viewLink: "#",
-    codeLink: "#",
+    title: "Crimechester",
+    description: "Mystery solving detective game with interactive graphics. Built with React, Express, and mySQL. User account registration and login with class selection and role based routing.",
+    image: Folder,
+    viewLink: "https://crimechester.com",
+    codeLink: "https://github.com/kwunderle/crimechester",
   },
-  {
-    title: "Game Garden",
-    description: "Interactive SVGs with animated mini games.",
-    image: "https://picsum.photos/400/200?random=14",
-    viewLink: "#",
-    codeLink: "#",
-  },
+  // {
+  //   title: "Tarot Reader",
+  //   description: "Learn card meanings and generate readings.",
+  //   image: "https://picsum.photos/400/200?random=13",
+  //   viewLink: "#",
+  //   codeLink: "#",
+  // },
+  // {
+  //   title: "Game Garden",
+  //   description: "Interactive SVGs with animated mini games.",
+  //   image: "https://picsum.photos/400/200?random=14",
+  //   viewLink: "#",
+  //   codeLink: "#",
+  // },
 ];
 
 export default function Projects() {
